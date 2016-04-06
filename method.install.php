@@ -49,16 +49,20 @@ $dict = NewDataDictionary($db);
 $sqlarray = $dict->CreateTableSQL(cms_db_prefix() . "module_mlecms_config", $flds, $taboptarray);
 $dict->ExecuteSQLArray($sqlarray);
 
+
 // permissions
 $this->CreatePermission('manage translator_mle', 'manage translator_mle');
 $this->CreatePermission('manage mle_cms', 'manage mle_cms');
 $this->CreatePermission('manage ' . MLE_SNIPPET . 'mle', 'manage ' . MLE_SNIPPET . 'mle');
 $this->CreatePermission('manage ' . MLE_BLOCK . 'mle', 'manage ' . MLE_BLOCK . 'mle');
 
+
 // preference
 $this->SetPreference('mle_hierarchy_switch', 1);
 $this->SetPreference('mle_auto_redirect', 0);
 
+
+// Templates
 $fn = cms_join_path(dirname(__FILE__), 'templates', 'orig_mle_template.tpl');
 if (file_exists($fn)) {
     $template = file_get_contents($fn);
@@ -72,12 +76,21 @@ if (file_exists($fn)) {
     $template = file_get_contents($fn);
     $this->SetTemplate('mle_templateDropdown', $template);
 }
+
 $fn = cms_join_path(dirname(__FILE__), 'templates', 'orig_mle_template_separator.tpl');
 if (file_exists($fn)) {
     $template = file_get_contents($fn);
     $this->SetTemplate('mle_templateSeparator', $template);
 }
 
+$fn = cms_join_path(dirname(__FILE__), 'templates', 'orig_mle_template_hreflang.tpl');
+if (file_exists($fn)) {
+    $template = file_get_contents($fn);
+    $this->SetTemplate('mle_templateHreflang', $template);
+}
+
+
+// Events
 $this->RegisterEvents();
 
 $this->CreateEvent('LangEdited');
