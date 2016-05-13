@@ -60,7 +60,7 @@ class MleCMS extends CGExtensions {
     }
 
     function GetVersion() {
-        return '1.11.4';
+        return '2.0';
     }
 
     function GetHelp() {
@@ -96,7 +96,7 @@ class MleCMS extends CGExtensions {
      * @param type $name
      * @param type $id
      * @param type $params
-     * @param type $returnid 
+     * @param type $returnid
      */
     public function DoAction($name, $id, $params, $returnid = '') {
         switch ($name) {
