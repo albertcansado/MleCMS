@@ -35,7 +35,6 @@ $lang['mle_init'] = 'Multilanguage detection';
 $lang['default_root_base'] = 'Default (based on root alias identification)';
 
 // Snippets
-
 $lang['manage_snippets'] = 'Snippets';
 $lang['unknown'] = 'Error: Unknown';
 $lang['delete'] = 'Delete';
@@ -76,14 +75,22 @@ $lang['help'] = '
 <h3>What Does This Do?</h3>
 <p>This module add multilanguage solution to your CMS Made Simple.</p>
 <h3>How Do I Use It</h3>
-<p>Check installation guide <a href="http://cmsmadesimple.sk/modules/MleCMS/installation-guide.html">Installation Guide</a></p>
-<p>or</p>
-<p><a target="_blank" href="http://blog.arvixe.com/creating-a-multilingual-cmsms-site-using-mlecms-module/">Creating a Multilingual CMSMS Site Using MleCMS Module</a></p>
+<p>Check <a target="_blank" href="http://blog.arvixe.com/creating-a-multilingual-cmsms-site-using-mlecms-module/">Creating a Multilingual CMSMS Site Using MleCMS Module</a></p>
+<h3>Variables available on templates</h3>
+<p>see Mle > Multilang config:</p>
+<ul>
+<li>lang_parent - Root alias</li>
+<li>lang_extra - Extra var</li>
+<li>lang_locale - name lang (en_US)</li>
+<li>lang_dir</li>
+</ul>
 <h3>Plugins</h3>
 <p><strong>Translate</strong> {translate text="some text"} or {translator}some text{/translator} or {"some text"|translate}</p>
+<p><i>You can use &lt;br /&gt; or &lt;br&gt; tag inside text, all other tags will be removed<i></p>
 <p>Params</p>
 <ul>
 <li>text (required) - text for translate</li>
+<li>varName (optional) - Ex. {translate text="hello :name!" name="Mario"} -> "hello Mario!"</li>
 <li>assign (optional)  - smarty assign</li>
 </ul>
 <br />
@@ -94,8 +101,5 @@ $lang['help'] = '
 <li>par (required)  - parameter for find mutlilangue string (example: title and mle version  are  title_sk, title_de, title_fr, where title is default string for default language. Great MLE solution in templates!!)</li>
 <li>assign (optional)  - assign to object</li>
 </ul>
-<br />
-<h3>Do you like my work? </h3>
-<p><a href="http://cmsmadesimple.sk/donate-card/?utm_source=cmsmadesimple&utm_medium=link&utm_campaign=help" target="_blank">Give me five or feel free to donate me</a></p>    
 ';
 ?>
