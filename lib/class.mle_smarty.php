@@ -32,7 +32,6 @@ class mle_smarty {
      * Initialize the smarty plugins.
      */
     public static function init() {
-        
         $smarty = cmsms()->GetSmarty();
         // translators
         $smarty->register_function('translate', array('mle_smarty', 'translator'));
@@ -43,14 +42,13 @@ class mle_smarty {
         $smarty->register_function('mle_assign', array('mle_smarty', 'mle_assign'));
         $smarty->register_function('mle_search_checker', array('mle_smarty', 'mle_search_checker'));
         $smarty->register_function('get_root_alias', array('mle_smarty', 'get_root_alias'));
-        
     }
 
     /**
      *  Translator smarty functon
-     * @param array $params 
+     * @param array $params
      * @param array $smarty
-     * @return type 
+     * @return type
      */
     public static function translator($params, &$smarty) {
         Translation::translate($params);
@@ -74,7 +72,6 @@ class mle_smarty {
     }
 
     public static function translator_modifier($content, $assign = null) {
-
         $module = cms_utils::get_module('MleCMS');
 
         $params = array();
@@ -89,10 +86,9 @@ class mle_smarty {
     /**
      *  get mle values from object (example $item->title, $item->title_en...)
      * @param array $params
-     * @param array $smarty 
+     * @param array $smarty
      */
     public static function mle_assign($params, &$smarty) {
-
         if ((!isset($params["array"]) && (!isset($params["object"]) || !is_object($params["object"]) )) || !isset($params["par"]))
             return;
 
@@ -133,12 +129,11 @@ class mle_smarty {
 
     /**
      * Return GetOne from Table for search restriction - require select, table
-     * @param array $params 
+     * @param array $params
      * @param object $smarty
-     * @return string 
+     * @return string
      */
     public static function mle_search_checker($params, &$smarty) {
-
         if (!isset($params["from"]) || !isset($params["select"]))
             return;
 
