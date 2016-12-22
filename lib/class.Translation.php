@@ -15,7 +15,7 @@ class Translation {
 
     /** static class */
     private function __construct() {
-        
+
     }
 
     private static function _init() {
@@ -29,12 +29,12 @@ class Translation {
             self::$_langs = mle_tools::get_langs();
 
         if (self::$_translations == null)
-            self::$_translations = unserialize(self::$_mod->GetPreference('translations'));
+            self::$_translations = json_decode(self::$_mod->GetPreference('translations'), true);
     }
 
     public static function save() {
         if(self::$_mod != null)
-        self::$_mod->SetPreference('translations', serialize(self::$_translations));
+        self::$_mod->SetPreference('translations', json_encode(self::$_translations));
     }
 
     public static function get_translations() {
