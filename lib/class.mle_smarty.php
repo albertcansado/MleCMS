@@ -88,44 +88,47 @@ class mle_smarty {
      * @param array $params
      * @param array $smarty
      */
-    public static function mle_assign($params, &$smarty) {
-        if ((!isset($params["array"]) && (!isset($params["object"]) || !is_object($params["object"]) )) || !isset($params["par"]))
-            return;
+     public static function mle_assign($params, &$smarty) {
+         if ((!isset($params["array"]) && (!isset($params["object"]) || !is_object($params["object"]) )) || !isset($params["par"]))
+             return;
 
-        $lang_parent = $smarty->get_template_vars('lang_parent');
-        if (isset($params["object"]))
-            $object = $params["object"];
-        if (isset($params["array"]))
-            $object = $params["array"];
-        $par = $params["par"];
-        $mle_par = $params["par"] . '_' . $lang_parent;
+         $lang_parent = $smarty->get_template_vars('lang_parent');
+         if (isset($params["object"])) {
+             $object = $params["object"];
+         } else if (isset($params["array"])) {
+             $object = $params["array"];
+         }
+         $par = $params["par"];
+         $mle_par = $params["par"] . '_' . $lang_parent;
 
+         if (isset($params["object"])) {
+             $value = property_exists($object, $par) ? $object->$par : null;
+             if (property_exists($object, $mle_par) && $object->$mle_par !== '') {
+                  $value = $object->$mle_par;
+             } else if ( isset($params["nodefault"]) && $params["nodefault"] !== $lang_parent ) {
+                 $value = '';
+             }
 
-        if (isset($params["object"])) {
-            $value = $object->$par;
-            if ($object->$mle_par != "")
-                $value = $object->$mle_par;
-            elseif (isset($params["nodefault"]) && $params["nodefault"] != $lang_parent)
-                $value = '';
-            $object->$par = $value;
-        }
+             $object->$par = $value;
+         }
 
-        if (isset($params["array"])) {
-            $value = $object[$par];
-            if ($object[$mle_par] != "")
-                $value = $object[$mle_par];
-            elseif (isset($params["nodefault"]) && $params["nodefault"] != $lang_parent)
-                $value = '';
+         if (isset($params["array"])) {
+             $value = array_key_exists($par, $object) ? $object[$par] : null;
+             if (array_key_exists($mle_par, $object) && $object[$mle_par] !== '') {
+                 $value = $object[$mle_par];
+             } else if ( isset($params["nodefault"]) && $params["nodefault"] !== $lang_parent ) {
+                 $value = '';
+             }
 
-            $object[$par] = $value;
-        }
+             $object[$par] = $value;
+         }
 
-
-        if (isset($params["assign"]))
-            $smarty->assign($params["assign"], $object);
-        else
-            echo $value;
-    }
+         if (isset($params["assign"])) {
+             $smarty->assign($params["assign"], $object);
+         } else {
+             echo $value;
+         }
+     }
 
     /**
      * Return GetOne from Table for search restriction - require select, table
