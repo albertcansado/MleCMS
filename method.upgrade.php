@@ -85,7 +85,7 @@ switch ($current_version) {
     case "1.8":
         $current_version = "1.9";
     case "1.9":
-// delete any dependencies
+        // delete any dependencies
         $query = "DELETE FROM " . cms_db_prefix() . "module_deps WHERE child_module = ? AND parent_module = ?";
         $db->Execute($query, array($this->GetName(), 'ContentCache'));
         $contentops = cmsms()->GetContentOperations();
@@ -128,6 +128,12 @@ switch ($current_version) {
         }
 
         $current_version = "1.12";
+    case "1.12":
+    case "2.0.0":
+    case "2.0.1":
+      $translations = unserialize($this->GetPreference('translations'));
+      $this->SetPreference('translations', json_encode($translations));
+      $current_version = "2.0.2";
 }
 
 // put mention into the admin log
