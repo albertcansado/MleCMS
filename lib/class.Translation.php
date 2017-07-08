@@ -75,7 +75,9 @@ class Translation {
         if (!isset($params['text']))
             return;
 
-        $lang_value = self::$_translations[$params['text']][self::$_lang];
+        $lang_value = isset(self::$_translations[$params['text']][self::$_lang])
+            ? self::$_translations[$params['text']][self::$_lang]
+            : false;
         if (!$lang_value) {
             $lang_value = self::$_translations[$params['text']][self::$_lang] = strip_tags($params['text'], '<br><br/><br />');
             self::save();
